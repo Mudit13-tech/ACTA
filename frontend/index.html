@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#05070f">
+<meta name="description" content="ACTA — an agentic commerce and task agent. Tell it what you want; it finds the best option, handles the workflow, and asks permission only when your policy requires it.">
+<title>ACTA — Agentic Commerce &amp; Task Agent</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script>window.__errs=[];window.addEventListener("error",function(e){window.__errs.push(e.message+" @"+(e.filename||"").split("/").pop()+":"+e.lineno)});window.addEventListener("unhandledrejection",function(e){window.__errs.push("promise: "+e.reason)});</script>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/glass.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/motion.css">
+<link rel="stylesheet" href="css/landing.css">
+<script>
+  /* Apply the saved theme before first paint so there is no flash. */
+  (function () {
+    try {
+      var s = JSON.parse(localStorage.getItem('acta.state.v1') || '{}');
+      var t = (s.prefs && s.prefs.theme) || 'dark';
+      if (t === 'system') document.documentElement.removeAttribute('data-theme');
+      else document.documentElement.setAttribute('data-theme', t);
+    } catch (e) {}
+  })();
+</script>
+</head>
+<body data-page="home" data-chrome="none">
+
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+<div class="shell shell--wide">
+  <header class="site-header" id="siteHeader">
+    <a class="brand" href="index.html" aria-label="ACTA">
+      <span class="brand__mark" data-icon="bolt"></span>
+      <span>ACTA</span>
+    </a>
+    <nav class="site-nav">
+      <a href="#loop">How it works</a>
+      <a href="#verticals">Verticals</a>
+      <a href="#safety">Safety</a>
+    </nav>
+    <div class="row" style="gap:6px">
+      <button class="btn btn--icon btn--quiet" data-theme-toggle aria-label="Switch theme"></button>
+      <a class="btn btn--primary btn--sm" href="dashboard.html">Open app</a>
+    </div>
+  </header>
+
+  <main class="page">
+
+    <!-- ============================================================ HERO -->
+    <section class="hero">
+      <div class="hero__copy">
+        <span class="chip chip--brand" data-reveal="scale">
+          <span class="pulse-dot pulse-dot--brand"></span>
+          Agentic commerce, six-week build
+        </span>
+
+        <h1 data-reveal="hero" style="--reveal-delay:60ms">
+          Tell the agent <span class="gradient-text">what you want.</span>
+        </h1>
+
+        <p class="hero__lede" data-reveal="hero" style="--reveal-delay:140ms">
+          ACTA finds the best option, handles the workflow, and asks for permission
+          only when your policy requires it. Not a chatbot that talks — a system that
+          observes, reasons, acts and verifies inside boundaries you set.
+        </p>
+
+        <div class="row wrap" data-reveal="hero" style="gap:var(--s-3);--reveal-delay:220ms">
+          <a class="btn btn--primary btn--lg" href="dashboard.html">
+            <span data-icon="rocket"></span> Launch the dashboard
+          </a>
+          <a class="btn btn--lg" href="#loop">See the loop</a>
+        </div>
+
+        <ul class="hero__stats" data-stagger="80">
+          <li><b data-count="3">0</b><span>verticals live</span></li>
+          <li><b data-count="12">0</b><span>loop stages</span></li>
+          <li><b data-count="0" data-count-suffix="₹" data-count-from="2000">0</b><span>card data stored</span></li>
+        </ul>
+      </div>
+
+      <!-- Live phone preview -->
+      <div class="hero__device" data-reveal="scale" data-tilt="6">
+        <div class="device">
+          <div class="device__notch"></div>
+          <div class="device__screen" id="devicePreview"></div>
+        </div>
+        <div class="device__glow" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <!-- ====================================================== MARQUEE -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track" id="marqueeTrack"></div>
+    </div>
+
+    <!-- ========================================================= LOOP -->
+    <section class="section" id="loop">
+      <div class="section__head" data-reveal>
+        <span class="eyebrow">The action loop</span>
+        <h2>Eight stages, one engine.</h2>
+        <p class="soft" style="margin-top:var(--s-3);max-width:56ch">
+          The platform is built around an agentic action loop rather than a single
+          domain workflow. Every vertical reuses the same stages — new domains arrive
+          as connectors, not rewrites.
+        </p>
+      </div>
+      <ol class="loop-grid" id="loopGrid" data-stagger="70"></ol>
+    </section>
+
+    <!-- ==================================================== VERTICALS -->
+    <section class="section" id="verticals">
+      <div class="section__head" data-reveal>
+        <span class="eyebrow">What ships first</span>
+        <h2>Three high-value verticals.</h2>
+      </div>
+      <div class="vertical-grid" id="verticalGrid" data-stagger="90"></div>
+    </section>
+
+    <!-- ================================================= ARCHITECTURE -->
+    <section class="section" id="architecture">
+      <div class="section__head" data-reveal>
+        <span class="eyebrow">System architecture</span>
+        <h2>Intelligence, execution, policy and verification stay separate.</h2>
+      </div>
+      <div class="arch glass glass--edge pad-lg" data-reveal>
+        <div class="arch__row" id="archRow"></div>
+        <div class="arch__loop mono t-xs mute">observe → reason → act → verify → learn</div>
+      </div>
+      <div class="layer-list" id="layerList" data-stagger="50"></div>
+    </section>
+
+    <!-- ======================================================= SAFETY -->
+    <section class="section" id="safety">
+      <div class="section__head" data-reveal>
+        <span class="eyebrow">Autonomy &amp; safety</span>
+        <h2>The agent never infers permission from intent.</h2>
+        <p class="soft" style="margin-top:var(--s-3);max-width:56ch">
+          Before any sensitive action, an explicit policy is evaluated. Spend limit,
+          category, action type, vendor, timing, data access and confidence each get
+          a vote — and any one of them can stop the run.
+        </p>
+      </div>
+
+      <div class="policy-grid" id="policyGrid" data-stagger="60"></div>
+
+      <div class="glass-2 glass--edge pad-lg states" data-reveal style="margin-top:var(--s-5)">
+        <span class="eyebrow">Action states</span>
+        <div class="states__flow mono t-xs" id="statesFlow"></div>
+        <div class="t-xs mute" style="margin-top:var(--s-3)">
+          Failure path: <span class="mono" style="color:var(--danger-400)">FAILED → RETRY / ESCALATE / ROLLBACK</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= CTA -->
+    <section class="section cta" data-reveal="scale">
+      <div class="glass-3 glass--edge glass--sheen pad-lg center" style="border-radius:var(--r-2xl)">
+        <span class="brand__mark float" style="width:52px;height:52px;border-radius:17px;margin-inline:auto" data-icon="bolt"></span>
+        <h2 style="margin-top:var(--s-4)">One request in. A verified outcome out.</h2>
+        <p class="soft" style="margin-top:var(--s-3);max-width:46ch;margin-inline:auto">
+          Type a goal and watch the task get planned, candidates appear, a ranked
+          recommendation land, and a clear approve-or-executed state arrive.
+        </p>
+        <div class="row wrap center" style="justify-content:center;gap:var(--s-3);margin-top:var(--s-5)">
+          <a class="btn btn--primary btn--lg" href="dashboard.html">Open the dashboard</a>
+          <a class="btn btn--lg" href="styleguide.html">Design system</a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <div class="row-between wrap" style="gap:var(--s-4)">
+        <div class="row" style="gap:var(--s-2)">
+          <span class="brand__mark" style="width:24px;height:24px;border-radius:8px" data-icon="bolt"></span>
+          <span class="t-xs mute">ACTA — Agentic Commerce &amp; Task Agent</span>
+        </div>
+        <span class="t-2xs faint">Front-end prototype · simulated transactions are labelled in the UI</span>
+      </div>
+    </footer>
+  </main>
+</div>
+
+<script src="js/icons.js"></script>
+<script src="js/store.js"></script>
+<script src="js/data.js"></script>
+<script src="js/motion.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/views.js"></script>
+<script src="js/pages/home.js"></script>
+</body>
+</html>

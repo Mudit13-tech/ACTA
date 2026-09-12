@@ -1,0 +1,110 @@
+/* ==========================================================================
+   ACTA — App pages (dashboard, task, discover, monitoring, approvals…)
+   ========================================================================== */
+
+.page > section { margin-bottom: var(--s-6); }
+.page > section:last-child { margin-bottom: 0; }
+
+/* -------------------------------------------------------------- Greeting */
+.greeting h2 { font-size: var(--t-xl); }
+.greeting__date { font-size: var(--t-xs); color: var(--text-mute); margin-bottom: 4px; }
+
+/* -------------------------------------------------------------- Composer */
+.composer-wrap { position: relative; }
+.composer-wrap::before {
+  content: ""; position: absolute; inset: -14px -6px;
+  background: radial-gradient(60% 80% at 50% 50%, var(--aurora-1), transparent 70%);
+  filter: blur(28px); opacity: .45; pointer-events: none;
+  transition: opacity var(--d-4) var(--e-out);
+}
+.composer-wrap:focus-within::before { opacity: .8; }
+.composer { position: relative; }
+.composer__hint { font-size: var(--t-2xs); color: var(--text-faint); padding: 0 4px 6px; }
+.suggestions { display: flex; gap: 6px; overflow-x: auto; padding-block: var(--s-3) 2px; scrollbar-width: none; }
+.suggestions::-webkit-scrollbar { display: none; }
+.suggestions .chip { cursor: pointer; }
+
+/* ------------------------------------------------------------ Stat grid */
+.stat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--s-3); }
+.stat-grid .stat { display: flex; flex-direction: column; gap: 2px; }
+.stat__top { display: flex; align-items: center; justify-content: space-between; }
+
+/* ----------------------------------------------------------- Alert card */
+.alert-card { padding: var(--s-4); border-radius: var(--r-lg); display: flex; gap: var(--s-3); align-items: flex-start; }
+.alert-card__body { flex: 1; min-width: 0; }
+.alert-card h4 { font-size: var(--t-sm); }
+.alert-card p { font-size: var(--t-xs); color: var(--text-soft); margin-top: 3px; }
+
+/* ------------------------------------------------------- Task workspace */
+.task-hero { padding: var(--s-5); border-radius: var(--r-xl); }
+.task-hero__intent { font-family: var(--font-display); font-size: var(--t-lg); font-weight: 600; line-height: 1.28; letter-spacing: var(--ls-tight); }
+.goal-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--s-2); }
+.goal-cell { padding: 11px 13px; border-radius: var(--r-sm); }
+.goal-cell b { display: block; font-size: var(--t-sm); font-weight: 600; margin-top: 2px; }
+.goal-cell span { font-size: var(--t-2xs); color: var(--text-mute); letter-spacing: .04em; text-transform: uppercase; font-weight: 600; }
+
+.stage-strip { display: flex; gap: 5px; overflow-x: auto; padding-block: 2px 8px; scrollbar-width: none; }
+.stage-strip::-webkit-scrollbar { display: none; }
+.stage-pill {
+  flex: 0 0 auto; padding: 7px 12px; border-radius: var(--r-pill);
+  font-size: var(--t-2xs); font-weight: 600; white-space: nowrap;
+  border: 1px solid var(--glass-hairline); background: var(--well-bg); color: var(--text-mute);
+  transition: all var(--d-3) var(--e-out);
+}
+.stage-pill[data-state="done"]   { color: var(--ok-400); border-color: color-mix(in srgb, var(--ok-500) 40%, transparent); background: color-mix(in srgb, var(--ok-500) 12%, transparent); }
+.stage-pill[data-state="active"] { color: #fff; border-color: transparent; background: linear-gradient(120deg, var(--brand-500), var(--cyan-500)); box-shadow: var(--glow-brand); }
+
+.timeline-wrap { max-height: 460px; overflow-y: auto; padding-right: 4px; }
+
+/* Action bar pinned above the tab bar on the task page */
+.action-dock {
+  position: sticky;
+  bottom: calc(var(--s-3));
+  border-radius: var(--r-xl);
+  padding: var(--s-4);
+  z-index: var(--z-sticky);
+}
+
+/* ---------------------------------------------------------- Discover */
+.filter-bar { display: flex; gap: 6px; overflow-x: auto; padding-block: 2px 8px; scrollbar-width: none; }
+.filter-bar::-webkit-scrollbar { display: none; }
+.compare-table { width: 100%; border-collapse: collapse; font-size: var(--t-xs); }
+.compare-table th, .compare-table td { padding: 9px 8px; text-align: left; border-bottom: 1px solid var(--glass-hairline); }
+.compare-table th { font-size: var(--t-2xs); text-transform: uppercase; letter-spacing: .07em; color: var(--text-mute); font-weight: 600; }
+.compare-table td:first-child { font-weight: 600; }
+.compare-scroll { overflow-x: auto; margin-inline: calc(var(--gutter) * -1); padding-inline: var(--gutter); }
+
+/* ---------------------------------------------------------- Settings */
+.setting-row { display: flex; align-items: center; gap: var(--s-3); padding: var(--s-3) 0; border-bottom: 1px solid var(--glass-hairline); }
+.setting-row:last-child { border-bottom: 0; }
+.setting-row__text { flex: 1; min-width: 0; }
+.setting-row__text b { display: block; font-size: var(--t-sm); font-weight: 600; }
+.setting-row__text span { font-size: var(--t-xs); color: var(--text-mute); }
+
+.limit-display {
+  font-family: var(--font-display); font-size: var(--t-2xl); font-weight: 600;
+  font-variant-numeric: tabular-nums; letter-spacing: var(--ls-tight);
+}
+
+/* ------------------------------------------------------------- More */
+.more-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--s-3); }
+.more-tile {
+  padding: var(--s-4); border-radius: var(--r-lg);
+  display: flex; flex-direction: column; gap: var(--s-3);
+  min-height: 116px;
+}
+.more-tile b { font-size: var(--t-sm); }
+.more-tile span { font-size: var(--t-2xs); color: var(--text-mute); }
+
+/* ---------------------------------------------------------- Metrics */
+.metric-row { display: flex; align-items: center; gap: var(--s-3); padding: var(--s-3) 0; border-bottom: 1px solid var(--glass-hairline); }
+.metric-row:last-child { border-bottom: 0; }
+.metric-row__q { flex: 1; min-width: 0; }
+.metric-row__q b { display: block; font-size: var(--t-sm); }
+.metric-row__q span { font-size: var(--t-2xs); color: var(--text-mute); }
+.metric-row__v { font-family: var(--font-display); font-weight: 600; font-variant-numeric: tabular-nums; }
+
+/* --------------------------------------------------- Slightly wider */
+@media (min-width: 420px) {
+  .goal-grid { grid-template-columns: repeat(2, 1fr); }
+}

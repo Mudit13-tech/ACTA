@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#05070f">
+<meta name="description" content="The ACTA design system — tokens, glass elevations, components and motion.">
+<title>ACTA — Design System</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script>window.__errs=[];window.addEventListener("error",function(e){window.__errs.push(e.message+" @"+(e.filename||"").split("/").pop()+":"+e.lineno)});window.addEventListener("unhandledrejection",function(e){window.__errs.push("promise: "+e.reason)});</script>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/glass.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/motion.css">
+<link rel="stylesheet" href="css/app.css">
+<link rel="stylesheet" href="css/landing.css">
+<style>
+  .sg-section { margin-bottom: var(--s-8); }
+  .sg-section > h3 { margin-bottom: var(--s-2); }
+  .sg-section > p { color: var(--text-mute); font-size: var(--t-sm); margin-bottom: var(--s-4); }
+  .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); gap: var(--s-2); }
+  .swatch { border-radius: var(--r-md); overflow: hidden; border: 1px solid var(--glass-hairline); }
+  .swatch__chip { height: 54px; }
+  .swatch__meta { padding: 7px 9px; font-size: 10px; }
+  .swatch__meta b { display: block; font-weight: 600; }
+  .swatch__meta span { color: var(--text-faint); font-family: var(--font-mono); font-size: 9px; }
+  .type-row { padding-block: var(--s-3); border-bottom: 1px solid var(--glass-hairline); }
+  .type-row:last-child { border-bottom: 0; }
+  .type-row small { display: block; font-family: var(--font-mono); font-size: 10px; color: var(--text-faint); margin-bottom: 4px; }
+  .demo-grid { display: grid; gap: var(--s-3); grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+  .demo-box { padding: var(--s-4); border-radius: var(--r-lg); text-align: center; font-size: var(--t-xs); }
+  .space-bar { background: linear-gradient(90deg, var(--brand-500), var(--cyan-500)); height: 10px; border-radius: 99px; }
+  .radius-box { height: 62px; background: var(--glass-2-bg); border: 1px solid var(--glass-2-border); display: grid; place-items: center; font-size: 10px; font-family: var(--font-mono); }
+  .ease-track { height: 6px; border-radius: 99px; background: var(--glass-hairline); position: relative; overflow: visible; }
+  .ease-dot { position: absolute; top: -6px; width: 18px; height: 18px; border-radius: 50%; background: linear-gradient(135deg, var(--brand-400), var(--cyan-400)); box-shadow: var(--glow-brand); }
+</style>
+<script>
+  (function () {
+    try {
+      var s = JSON.parse(localStorage.getItem('acta.state.v1') || '{}');
+      var t = (s.prefs && s.prefs.theme) || 'dark';
+      if (t === 'system') document.documentElement.removeAttribute('data-theme');
+      else document.documentElement.setAttribute('data-theme', t);
+    } catch (e) {}
+  })();
+</script>
+</head>
+<body data-page="styleguide" data-chrome="none">
+
+<div class="shell shell--wide">
+  <header class="site-header" id="siteHeader">
+    <a class="brand" href="index.html"><span class="brand__mark" data-icon="bolt"></span><span>ACTA</span></a>
+    <nav class="site-nav">
+      <a href="#color">Colour</a><a href="#type">Type</a><a href="#glass">Glass</a>
+      <a href="#components">Components</a><a href="#motion">Motion</a>
+    </nav>
+    <div class="row" style="gap:6px">
+      <button class="btn btn--icon btn--quiet" data-theme-toggle aria-label="Switch theme"></button>
+      <a class="btn btn--primary btn--sm" href="dashboard.html">Open app</a>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="section" style="padding-block:var(--s-7) var(--s-6)">
+      <span class="eyebrow" data-reveal>Design system</span>
+      <h1 class="t-2xl" style="margin-top:var(--s-2)" data-reveal="hero">The tools everything else is built from.</h1>
+      <p class="soft" style="margin-top:var(--s-3);max-width:58ch" data-reveal>
+        One token file drives colour, type, space, radius, elevation and motion.
+        Components pick a glass level and a token — never a raw hex value — so a
+        theme change is a variable change, not a rewrite.
+      </p>
+    </section>
+
+    <section class="sg-section" id="color">
+      <h3>Colour</h3>
+      <p>Brand ramp, semantic state and themed surfaces. Light theme redefines only the themed layer.</p>
+      <div id="swatchBrand" class="swatches" style="margin-bottom:var(--s-4)"></div>
+      <div id="swatchState" class="swatches"></div>
+    </section>
+
+    <section class="sg-section" id="type">
+      <h3>Typography</h3>
+      <p>Space Grotesk for display, Inter for text, JetBrains Mono for machine output. The scale is fluid.</p>
+      <div class="glass glass--edge pad" id="typeScale"></div>
+    </section>
+
+    <section class="sg-section" id="glass">
+      <h3>Glass elevations</h3>
+      <p>Three levels, plus a specular rim and optional tint. Blur drops automatically on low-end devices.</p>
+      <div class="demo-grid" id="glassDemo"></div>
+    </section>
+
+    <section class="sg-section" id="space">
+      <h3>Space &amp; radius</h3>
+      <p>A 4pt scale and six radii. Touch targets never go below 44px.</p>
+      <div class="glass glass--edge pad stack" id="spaceDemo"></div>
+      <div class="demo-grid" style="margin-top:var(--s-3)" id="radiusDemo"></div>
+    </section>
+
+    <section class="sg-section" id="components">
+      <h3>Components</h3>
+      <p>Every control in the product, in one place.</p>
+      <div class="stack-lg" id="componentDemo"></div>
+    </section>
+
+    <section class="sg-section" id="icons">
+      <h3>Icons</h3>
+      <p>A single stroked 24px set, inlined as SVG so they inherit colour and weight.</p>
+      <div class="glass glass--edge pad" id="iconGrid"></div>
+    </section>
+
+    <section class="sg-section" id="motion">
+      <h3>Motion</h3>
+      <p>Expo-out is the house curve. Tap the easings to compare them; everything stops under reduced motion.</p>
+      <div class="glass glass--edge pad stack" id="motionDemo"></div>
+    </section>
+
+    <footer class="site-footer">
+      <span class="t-2xs faint">ACTA design system · tokens live in css/tokens.css</span>
+    </footer>
+  </main>
+</div>
+
+<script src="js/icons.js"></script>
+<script src="js/store.js"></script>
+<script src="js/data.js"></script>
+<script src="js/motion.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/views.js"></script>
+<script src="js/pages/styleguide.js"></script>
+</body>
+</html>
