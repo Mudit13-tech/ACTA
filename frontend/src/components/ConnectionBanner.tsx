@@ -1,16 +1,21 @@
+import { useLocation } from 'react-router-dom';
 import { useAgent } from '../context/AgentContext';
 import { IconAlert } from './Icons';
 
 /**
  * The whole app is server-driven, so a stopped backend should say so plainly
  * rather than looking like an app that does nothing.
+ *
+ * The welcome screen is the exception: nothing on it asks the agent for
+ * anything, so a backend warning there is noise in front of the front door.
  */
 const ConnectionBanner = () => {
   const { connection, reload } = useAgent();
-  if (connection !== 'offline') return null;
+  const { pathname } = useLocation();
+  if (connection !== 'offline' || pathname.startsWith('/welcome')) return null;
 
   return (
-    <div className="banner" role="status">
+    <div className="banner" role="status" aria-live="polite">
       <IconAlert size={16} />
       <span className="grow">
         Can't reach the agent.

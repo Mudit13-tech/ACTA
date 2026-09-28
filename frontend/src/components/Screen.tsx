@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { IconBack } from './Icons';
+import { isPushed } from '../lib/nav';
 
 interface Props {
   title: ReactNode;
@@ -21,6 +22,8 @@ interface Props {
  */
 const Screen = ({ title, sub, back, action, flush, bare, children }: Props) => {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
+  const end = isPushed(pathname) ? ' screen--nonav' : '';
 
   return (
     <>
@@ -42,7 +45,7 @@ const Screen = ({ title, sub, back, action, flush, bare, children }: Props) => {
         {action}
       </header>
       )}
-      <main className={flush ? 'screen screen--flush' : 'screen'}>{children}</main>
+      <main className={`screen${flush ? ' screen--flush' : ''}${end}`}>{children}</main>
     </>
   );
 };

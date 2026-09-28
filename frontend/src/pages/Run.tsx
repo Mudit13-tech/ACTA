@@ -95,7 +95,7 @@ const Run = () => {
   return (
     <Screen title="Task" sub={timeOf(run.createdAt)} back="/tasks">
       {/* ── Status ───────────────────────────────────────────── */}
-      <section className="section" style={{ paddingTop: 18 }}>
+      <section className="section section--first">
         <div className="row mb-3">
           <span className={`pill ${head.pill}`}>
             {(run.status === 'running' || run.status === 'monitoring') && <span className="dot" />}
@@ -107,7 +107,7 @@ const Run = () => {
         <p className="small mt-2">{head.line}</p>
 
         {(run.status === 'running' || run.status === 'monitoring') && active && (
-          <div className="card card--tight row" style={{ marginTop: 14, gap: 12 }}>
+          <div className="card card--tight row mt-4">
             <span className="spinner" />
             <span className="grow">
               <span className="small" style={{ display: 'block' }}>{active.name}</span>
@@ -132,13 +132,13 @@ const Run = () => {
       {/* ── Receipt ──────────────────────────────────────────── */}
       {run.receipt && (
         <section className="section fade-in">
-          <div className="card card--glow">
+          <div className="card card--glow tint--mint">
             <div className="row mb-3">
               <span className="pill pill--auto"><IconCheck size={12} /> verified</span>
               <span className="tiny">{timeOf(run.receipt.paidAt)}</span>
             </div>
             <p className="tiny mb-2">Paid to {run.receipt.vendor}</p>
-            <p className="amount" style={{ fontSize: 30, marginBottom: 12 }}>{inr(paid)}</p>
+            <p className="amount mb-3" style={{ fontSize: 30 }}>{inr(paid)}</p>
             <div className="kv"><span className="kv__k">Reference</span><span className="kv__v mono tiny">{run.receipt.reference}</span></div>
             <div className="kv"><span className="kv__k">Method</span><span className="kv__v tiny">{run.receipt.method}</span></div>
             <div className="kv">
@@ -205,8 +205,8 @@ const Run = () => {
           <>
             <div className="card card--flat mb-4">
               <p className="tiny">{pick.vendor}</p>
-              <p className="h3" style={{ margin: '3px 0 8px' }}>{pick.title}</p>
-              <p className="amount" style={{ fontSize: 30, marginBottom: 10 }}>{inr(pick.price)}</p>
+              <p className="h3 mb-2">{pick.title}</p>
+              <p className="amount mb-3" style={{ fontSize: 30 }}>{inr(pick.price)}</p>
               <ul className="facts">
                 {pick.facts.map((fact) => (
                   <li key={fact}>{fact}</li>

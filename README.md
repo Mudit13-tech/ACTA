@@ -1,4 +1,4 @@
-# ACTA — Agentic Commerce & AI Payment Automation
+# Sable — Agentic Commerce & AI Payment Automation
 
 The trust and transaction layer for AI agents. You state a goal and your
 boundaries; the agent searches, compares, decides, waits for the right price,

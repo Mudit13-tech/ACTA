@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Screen from '../components/Screen';
 import Sheet from '../components/Sheet';
+import { Wordmark } from '../components/Brand';
 import { IconArrow, IconCard, IconInfo, IconMoon, IconShield, IconSun, IconUser } from '../components/Icons';
 import { useProfile } from '../context/ProfileContext';
 import { useTheme } from '../context/ThemeContext';
@@ -11,7 +12,7 @@ import { inr } from '../lib/format';
 
 const Settings = () => {
   const navigate = useNavigate();
-  const { profile, initial, update, device } = useProfile();
+  const { profile, initial, update, signOut, device } = useProfile();
   const { mode, toggle } = useTheme();
   const { policy } = usePolicy();
   const { runs, clearHistory } = useAgent();
@@ -31,11 +32,11 @@ const Settings = () => {
     <Screen title="Settings">
       {/* Who the agent is acting for. */}
       <section className="section section--first">
-        <div className="card row" style={{ gap: 'var(--s4)' }}>
+        <div className="card card--glow tint--straw row" style={{ gap: 'var(--s4)' }}>
           <span className="avatar avatar--lg">{initial}</span>
           <span className="grow">
             <span className="h2" style={{ display: 'block' }}>{profile.name}</span>
-            <span className="tiny">{profile.email || `Using ACTA since ${since}`}</span>
+            <span className="tiny">{profile.email || `Using Sable since ${since}`}</span>
           </span>
           <button className="btn btn--sm btn--ghost" onClick={() => setEditing(true)}>Edit</button>
         </div>
@@ -59,7 +60,7 @@ const Settings = () => {
             <IconCard size={19} />
             <span className="grow">
               <span className="h3" style={{ display: 'block' }}>Payment method</span>
-              <span className="tiny">ACTA virtual card, ending {profile.card} — single-use per task</span>
+              <span className="tiny">Sable virtual card, ending {profile.card} — single-use per task</span>
             </span>
           </div>
         </div>
@@ -83,7 +84,7 @@ const Settings = () => {
           <button className="rowitem" onClick={() => navigate('/about')}>
             <IconInfo size={19} />
             <span className="grow">
-              <span className="h3" style={{ display: 'block' }}>What ACTA is</span>
+              <span className="h3" style={{ display: 'block' }}>What Sable is</span>
               <span className="tiny">How the agent decides, and where it stops</span>
             </span>
             <IconArrow size={15} />
@@ -98,10 +99,26 @@ const Settings = () => {
       </section>
 
       <section className="section">
-        <button className="btn btn--danger btn--block btn--sm" onClick={() => void clearHistory()}>
-          Clear finished tasks
-        </button>
-        <p className="tiny center mt-3">Anything still running or waiting on you is kept.</p>
+        <div className="stack stack-2">
+          <button className="btn btn--outline btn--block btn--sm" onClick={() => void clearHistory()}>
+            Clear finished tasks
+          </button>
+          <button className="btn btn--danger btn--block btn--sm" onClick={signOut}>
+            Sign out
+          </button>
+        </div>
+        <p className="tiny center mt-3">
+          Clearing keeps anything still running or waiting on you. Signing out returns you to the
+          welcome screen; your tasks and limits stay where they are.
+        </p>
+      </section>
+
+      {/* The name, signed off once at the bottom of the deepest screen. */}
+      <section className="section section--foot">
+        <div className="brand brand--center">
+          <Wordmark size={15} />
+        </div>
+        <p className="tiny center mt-3">The trust layer between an agent and your money.</p>
       </section>
 
       <Sheet open={editing} onClose={() => setEditing(false)} title="Your details">

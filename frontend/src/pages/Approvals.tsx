@@ -15,8 +15,8 @@ const Approvals = () => {
 
   return (
     <Screen title="Approvals" sub={pending.length ? `${pending.length} waiting on you` : 'Nothing waiting'}>
-      <section className="section" style={{ paddingTop: 18 }}>
-        <div className="card card--flat row" style={{ gap: 12 }}>
+      <section className="section section--first">
+        <div className="card card--flat tint--blue row" style={{ gap: 12 }}>
           <IconShield size={20} />
           <span className="grow">
             <span className="small" style={{ display: 'block' }}>
@@ -43,7 +43,7 @@ const Approvals = () => {
               const pick = run.offers.find((o) => o.id === run.pickId);
               if (!pick) return null;
               return (
-                <article key={run.id} className="card card--glow fade-in">
+                <article key={run.id} className="card card--asking fade-in">
                   <div className="row-between mb-2">
                     <span className="pill pill--ask">approval needed</span>
                     <span className="tiny">{timeOf(run.createdAt)}</span>
@@ -51,7 +51,7 @@ const Approvals = () => {
 
                   <p className="tiny mb-2">{pick.vendor}</p>
                   <h3 className="h3 mb-2">{pick.title}</h3>
-                  <p className="amount" style={{ fontSize: 24, marginBottom: 10 }}>{inr(pick.price)}</p>
+                  <p className="amount mb-3" style={{ fontSize: 24 }}>{inr(pick.price)}</p>
 
                   <ul className="reasons mb-4">
                     {(run.verdict?.reasons ?? []).slice(0, 2).map((reason, i) => (

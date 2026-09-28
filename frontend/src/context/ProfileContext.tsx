@@ -8,6 +8,8 @@ export interface Profile {
   /** Last four of the simulated card the agent pays with. */
   card: string;
   since: string;
+  /** Whether anyone has been through the welcome screen on this device. */
+  signedIn: boolean;
 }
 
 const KEY = 'acta.profile';
@@ -17,12 +19,17 @@ const DEFAULT_PROFILE: Profile = {
   email: '',
   card: '4492',
   since: new Date().toISOString(),
+  signedIn: false,
 };
 
 interface ProfileCtx {
   profile: Profile;
   initial: string;
   update: (patch: Partial<Profile>) => void;
+  /** Finish the welcome screen: the agent now has someone to act for. */
+  signIn: (details: { name: string; email: string }) => void;
+  /** Back to the welcome screen. Tasks and limits are the server's, so they stay. */
+  signOut: () => void;
   device: string;
 }
 
@@ -48,14 +55,24 @@ export const ProfileProvider = ({ children }: { children: ReactNode }) => {
 
   const update = useCallback((patch: Partial<Profile>) => setProfile((p) => ({ ...p, ...patch })), []);
 
+  const signIn = useCallback(
+    ({ name, email }: { name: string; email: string }) =>
+      setProfile((p) => ({ ...p, name, email, signedIn: true, since: p.signedIn ? p.since : new Date().toISOString() })),
+    [],
+  );
+
+  const signOut = useCallback(() => setProfile((p) => ({ ...p, signedIn: false })), []);
+
   const value = useMemo(
     () => ({
       profile,
       initial: (profile.name.trim()[0] ?? 'G').toUpperCase(),
       update,
+      signIn,
+      signOut,
       device: deviceKey(),
     }),
-    [profile, update],
+    [profile, update, signIn, signOut],
   );
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;

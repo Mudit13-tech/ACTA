@@ -1,4 +1,4 @@
-# ACTA — phone client
+# Sable — phone client
 
 Designed for a 360–430px viewport first, centred in a device frame on wider
 screens. The server owns the action loop; this app states goals, shows the loop
@@ -23,7 +23,7 @@ money.
 | **Home** | Who am I, what needs me right now, and what has the agent spent today? |
 | **Tasks** | What have I asked for, and what did the agent do about it? (History is the audit log.) |
 | **Approvals** | What is waiting on my decision? |
-| **Settings** | My profile, the agent's limits, appearance, and what ACTA is. |
+| **Settings** | My profile, the agent's limits, appearance, and what Sable is. |
 
 The nav is four icons in a strip of frosted circles, with a white puck that
 springs to whichever is current — no labels, because four icons are learned

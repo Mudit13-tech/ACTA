@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Sable">
+  <title>Sable</title>
+  <rect width="64" height="64" rx="15" fill="#0a0b0e"/>
+  <!-- The heraldic lozenge, keyed in pearl -->
+  <path d="M32 11 50 32 32 53 14 32z" fill="none" stroke="#f2eee8" stroke-width="2.4" stroke-linejoin="round"/>
+  <!-- The table facet, the line a cut stone is read by -->
+  <path d="M14 32h36" stroke="#f2eee8" stroke-width="1.2" opacity="0.34"/>
+  <!-- The centre stone -->
+  <path d="M32 22.4 41.6 32 32 41.6 22.4 32z" fill="#5cbd9a"/>
+</svg>

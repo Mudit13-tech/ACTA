@@ -22,7 +22,7 @@ const OfferCard = ({ offer, rank, picked, budget }: Props) => {
     <article className={picked ? 'card card--glow' : 'card card--tight'}>
       <div className="row-between" style={{ alignItems: 'flex-start' }}>
         <div className="grow">
-          <div className="row" style={{ gap: 6, marginBottom: 3 }}>
+          <div className="row mb-2" style={{ gap: 'var(--s2)' }}>
             {rank !== undefined && <span className="tiny mono">#{rank}</span>}
             <span className="tiny">{offer.vendor}</span>
             {picked && <span className="pill pill--info">agent's pick</span>}
@@ -31,7 +31,7 @@ const OfferCard = ({ offer, rank, picked, budget }: Props) => {
         </div>
       </div>
 
-      <div className="row" style={{ gap: 8, flexWrap: 'wrap', marginBottom: 8 }}>
+      <div className="row mb-2" style={{ flexWrap: 'wrap' }}>
         <span className="amount" style={{ fontSize: 18 }}>{inr(offer.price)}</span>
         {off > 0 && (
           <>
@@ -42,14 +42,14 @@ const OfferCard = ({ offer, rank, picked, budget }: Props) => {
         {overBudget && <span className="pill pill--block">over budget</span>}
       </div>
 
-      <div className="row" style={{ gap: 12, flexWrap: 'wrap', marginBottom: 12 }}>
+      <div className="row mb-3" style={{ flexWrap: 'wrap' }}>
         <span className="tiny">{offer.rating.toFixed(1)} from {offer.reviews.toLocaleString('en-IN')} reviews</span>
         <span className="tiny">{CANCEL_LABEL[offer.cancellation]}</span>
         {offer.score !== undefined && <span className="tiny">Scored {offer.score}</span>}
       </div>
 
       {offer.facts.length > 0 && (
-        <ul className="facts" style={{ marginBottom: offer.reasons?.length ? 14 : 0 }}>
+        <ul className={offer.reasons?.length ? 'facts mb-4' : 'facts'}>
           {offer.facts.map((fact) => (
             <li key={fact}>{fact}</li>
           ))}

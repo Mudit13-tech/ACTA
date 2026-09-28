@@ -56,7 +56,7 @@ const Tasks = () => {
       </section>
 
       {tab === 'tasks' ? (
-        <section className="section">
+        <section className={runs.length === 0 ? 'section section--fill' : 'section'}>
           {runs.length === 0 ? (
             <div className="empty">
               {connection === 'connecting' ? (
@@ -104,7 +104,7 @@ const Tasks = () => {
           )}
         </section>
       ) : (
-        <section className="section">
+        <section className={activity.length === 0 ? 'section section--fill' : 'section'}>
           {activity.length === 0 ? (
             <div className="empty">
               <IconList size={24} />

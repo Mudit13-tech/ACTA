@@ -268,10 +268,10 @@ def check_policy(offer, policy, already_spent):
 
 def _reference():
     block = lambda: ''.join(random.choices(string.ascii_uppercase + string.digits, k=4))  # noqa: E731
-    return f'ACTA-{block()}-{block()}'
+    return f'SBL-{block()}-{block()}'
 
 
-def make_receipt(offer, method='ACTA virtual card · single-use'):
+def make_receipt(offer, method='Sable virtual card · single-use'):
     return {
         'reference': _reference(),
         'paidAt': timezone.now().isoformat(),
@@ -442,7 +442,7 @@ def advance(run, policy):
             log=[
                 f"cart: {pick['title']}",
                 f"payable: {inr(pick['price'])}",
-                'instrument: ACTA virtual card · single-use',
+                'instrument: Sable virtual card · single-use',
             ],
         )
 

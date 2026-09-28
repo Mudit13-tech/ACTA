@@ -3,6 +3,8 @@ import type { CSSProperties } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import Screen from '../components/Screen';
 import { IconArrow } from '../components/Icons';
+import Ledger from '../components/Ledger';
+import CommandInput from '../components/CommandInput';
 import { useAgent } from '../context/AgentContext';
 import { usePolicy } from '../context/PolicyContext';
 import api, { type GoalPreview } from '../services/api';
@@ -61,32 +63,39 @@ const NewTask = () => {
 
   return (
     <Screen title="New task" back="/">
+      {/* The sentence, in the same hand it was written in on Home. */}
       <section className="section section--first">
-        <div className="field">
-          <label className="label" htmlFor="goal">What do you need done?</label>
-          <textarea
-            id="goal"
-            className="textarea"
-            placeholder="Find a highly rated hotel in Goa for 3 nights under ₹15,000 and book it"
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-            autoFocus
-          />
-        </div>
-        <div className="chiprow mt-3">
-          {EXAMPLES.map((example) => (
-            <button key={example} className="chip" onClick={() => setText(example)}>{example}</button>
-          ))}
-        </div>
+        <CommandInput
+          id="goal"
+          label="What do you need done?"
+          value={text}
+          onChange={setText}
+          placeholder="Find a highly rated hotel in Goa for 3 nights under ₹15,000 and book it"
+          autoFocus={!text}
+        />
+        {!text && (
+          <div className="chiprow mt-4">
+            {EXAMPLES.map((example) => (
+              <button key={example} className="chip" onClick={() => setText(example)}>{example}</button>
+            ))}
+          </div>
+        )}
       </section>
 
+      {/* The ceiling, drawn against the line where the agent must come back to
+          you — so you can see whether this errand will interrupt you before
+          you start it, not after. */}
       <section className="section">
-        <div className="row-between mb-3">
-          <span className="label">Most you will pay</span>
-          <span className="amount" style={{ fontSize: 19 }}>{inr(budget)}</span>
-        </div>
+        <Ledger
+          value={ceiling}
+          max={MAX}
+          mark={policy.autoApproveLimit}
+          tone={willAsk ? 'amber' : 'jade'}
+          leftLabel="Most you will pay"
+          rightLabel={willAsk ? 'It stops and asks you here' : 'It may pay without asking'}
+        />
         <input
-          className="slider"
+          className="slider mt-4"
           type="range"
           min={MIN}
           max={MAX}
@@ -119,15 +128,10 @@ const NewTask = () => {
               <div className="kv"><span className="kv__k">Also wants</span><span className="kv__v">{understood.constraints.join(', ')}</span></div>
             )}
           </div>
-          <p className="tiny mt-3">
-            {willAsk
-              ? `More than ${inr(policy.autoApproveLimit)}, so the agent will stop and ask you before paying.`
-              : `Within your ${inr(policy.autoApproveLimit)} limit, so the agent can pay without asking.`}
-          </p>
         </section>
       )}
 
-      <section className="section">
+      <section className="section section--foot">
         <button className="btn btn--block" disabled={!text.trim() || starting} onClick={() => void start()}>
           {starting ? <span className="spinner" /> : <IconArrow size={17} />}
           {starting ? 'Starting' : 'Start the task'}

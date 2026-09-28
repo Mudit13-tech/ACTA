@@ -73,7 +73,7 @@ async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
       },
     });
   } catch {
-    throw new ApiError("Can't reach the ACTA backend.", 0, null);
+    throw new ApiError("Can't reach the Sable backend.", 0, null);
   }
 
   if (response.status === 204) return undefined as T;

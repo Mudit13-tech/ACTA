@@ -2,6 +2,7 @@ import { Outlet, useLocation, useNavigationType } from 'react-router-dom';
 import { useEffect, useRef } from 'react';
 import TabBar from './TabBar';
 import ConnectionBanner from './ConnectionBanner';
+import { isPushed } from '../lib/nav';
 
 /**
  * The phone frame. One scroll container, one tab bar, and a push transition
@@ -20,11 +21,12 @@ const AppShell = () => {
 
   return (
     <div className="device" ref={ref}>
+      <span className="grain" aria-hidden="true" />
       <ConnectionBanner />
       <div key={pathname} className={back ? 'route route--back' : 'route'}>
         <Outlet />
       </div>
-      <TabBar />
+      {!isPushed(pathname) && <TabBar />}
     </div>
   );
 };

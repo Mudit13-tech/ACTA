@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import type { CSSProperties } from 'react';
 import Screen from '../components/Screen';
 import Sheet from '../components/Sheet';
 import { IconAlert, IconClose, IconShield } from '../components/Icons';
@@ -53,16 +54,16 @@ const Limits = () => {
       action={<button className="btn btn--ghost btn--sm" onClick={() => void reset()}>Reset</button>}
     >
       {error && (
-        <section className="section" style={{ paddingTop: 18, paddingBottom: 0 }}>
-          <div className="card card--tight row" style={{ gap: 10, borderColor: 'rgba(255,95,95,0.4)' }}>
+        <section className="section section--first">
+          <div className="card card--tight row" style={{ borderColor: 'color-mix(in srgb, var(--oxblood) 40%, transparent)' }}>
             <IconAlert size={17} />
             <span className="grow small">{error}</span>
           </div>
         </section>
       )}
 
-      <section className="section" style={{ paddingTop: 18 }}>
-        <div className="card card--glow row" style={{ gap: 12 }}>
+      <section className="section section--first">
+        <div className="card card--glow row">
           <IconShield size={22} />
           <span className="grow small">
             These rules run before every payment. The agent cannot step outside them — not for a
@@ -83,7 +84,7 @@ const Limits = () => {
           />
         </div>
 
-        <div className="card" style={{ marginTop: 12, opacity: policy.autoPayEnabled ? 1 : 0.5 }}>
+        <div className="card mt-3" style={{ opacity: policy.autoPayEnabled ? 1 : 0.5 }}>
           <div className="row-between mb-3">
             <span className="label">Pay without asking, up to</span>
             <span className="amount" style={{ fontSize: 17 }}>{inr(policy.autoApproveLimit)}</span>
@@ -98,8 +99,9 @@ const Limits = () => {
             onChange={(e) => void update({ autoApproveLimit: Number(e.target.value) })}
             disabled={!policy.autoPayEnabled}
             aria-label="Auto-approve limit"
+            style={{ '--fill': `${(policy.autoApproveLimit / 20000) * 100}%` } as CSSProperties}
           />
-          <div className="chiprow mt-3">
+          <div className="chiprow chiprow--inset mt-3">
             {LIMITS.map((l) => (
               <button
                 key={l}
@@ -135,12 +137,13 @@ const Limits = () => {
             value={policy.dailyCap}
             onChange={(e) => void update({ dailyCap: Number(e.target.value) })}
             aria-label="Daily cap"
+            style={{ '--fill': `${((policy.dailyCap - 5000) / 195000) * 100}%` } as CSSProperties}
           />
           <p className="tiny mt-3">
             {inr(spentToday)} used today. A task that would cross this cap is blocked outright.
           </p>
 
-          <hr className="divider" style={{ margin: '14px 0' }} />
+          <hr className="divider mt-4 mb-4" />
 
           <div className="row-between mb-3">
             <span className="label">Never spend more than</span>
@@ -155,6 +158,7 @@ const Limits = () => {
             value={policy.hardCeiling}
             onChange={(e) => void update({ hardCeiling: Number(e.target.value) })}
             aria-label="Hard ceiling"
+            style={{ '--fill': `${((policy.hardCeiling - 10000) / 490000) * 100}%` } as CSSProperties}
           />
           <p className="tiny mt-3">
             The agent will never execute a transaction above this, approval or not.
